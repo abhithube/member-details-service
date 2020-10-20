@@ -2,5 +2,14 @@ language: java
 jdk:
   - openjdk11
 
+services:
+  - docker
+
 script:
-  - ./mvnw test
+  - ./mvnw clean install -B -Dspring.data.mongodb.uri=${MONGO_URL}
+
+deploy:
+  provider: script
+  script: bash docker_push
+  on:
+    branch: master
