@@ -8,10 +8,10 @@ services:
 install: true
 
 script:
-  - docker build -t abhithube/member-details .
+  - docker build -t insurance-portal/member-details .
 
 deploy:
   provider: script
-  script: bash docker_push.sh
+  script: bash deploy.sh
   on:
     branch: master
