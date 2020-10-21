@@ -1,4 +1,4 @@
 FROM adoptopenjdk/openjdk11:alpine-jre
-VOLUME /tmp
-COPY target/member-details-service-0.0.1-SNAPSHOT.jar app.jar
+RUN cp target/member-details-service-0.0.1-SNAPSHOT.jar /app/src/app.jar
+WORKDIR /app/src
 ENTRYPOINT ["java","-jar","app.jar"]
