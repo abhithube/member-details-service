@@ -5,11 +5,13 @@ jdk:
 services:
   - docker
 
+install: true
+
 script:
-  - ./mvnw clean install -B -Dspring.data.mongodb.uri=${MONGO_URL}
+  - docker build -t abhithube/member-details .
 
 deploy:
   provider: script
-  script: bash docker_push
+  script: bash docker_push.sh
   on:
     branch: master

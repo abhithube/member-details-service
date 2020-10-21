@@ -1,4 +1,9 @@
+FROM adoptopenjdk/maven-openjdk11 AS build
+COPY src app/src
+COPY pom.xml app/
+RUN mvn -f app/pom.xml clean package
+
 FROM adoptopenjdk/openjdk11:alpine-jre
-RUN cp target/member-details-service-0.0.1-SNAPSHOT.jar /app/src/app.jar
-WORKDIR /app/src
+COPY --from=build app/target/member-details-service-0.0.1-SNAPSHOT.jar app/app.jar
+WORKDIR app
 ENTRYPOINT ["java","-jar","app.jar"]
