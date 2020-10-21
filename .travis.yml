@@ -5,6 +5,8 @@ jdk:
 services:
   - docker
 
+install: true
+
 deploy:
   provider: script
   script: bash docker_push
