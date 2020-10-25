@@ -10,7 +10,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 public class Payment {
-    private UUID id;
+    private String id;
     private Long amount;
     private long createdAt;
     private String plan;

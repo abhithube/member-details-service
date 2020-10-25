@@ -10,7 +10,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 public class Notification {
-    private UUID id;
+    private String id;
     private String title;
     private String description;
     private long createdAt;
