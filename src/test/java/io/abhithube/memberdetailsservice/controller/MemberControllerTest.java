@@ -1,5 +1,6 @@
 package io.abhithube.memberdetailsservice.controller;
 
+import io.abhithube.memberdetailsservice.dto.RegisterRequest;
 import io.abhithube.memberdetailsservice.model.Member;
 import io.abhithube.memberdetailsservice.service.MemberService;
 import org.junit.jupiter.api.DisplayName;
@@ -73,11 +74,11 @@ class MemberControllerTest {
         Member member = new Member();
         member.setUsername("name");
 
-        when(memberService.saveMember(any(Member.class)))
+        when(memberService.saveMember(any(RegisterRequest.class)))
                 .thenReturn(member);
 
         // Act
-        ResponseEntity<Member> responseEntity = memberController.saveMember(new Member());
+        ResponseEntity<Member> responseEntity = memberController.saveMember(new RegisterRequest());
 
         // Assert
         Member out = responseEntity.getBody();

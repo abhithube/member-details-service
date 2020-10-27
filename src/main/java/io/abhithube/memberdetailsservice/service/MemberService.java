@@ -1,7 +1,7 @@
 package io.abhithube.memberdetailsservice.service;
 
+import io.abhithube.memberdetailsservice.dto.RegisterRequest;
 import io.abhithube.memberdetailsservice.exception.CustomerNotFoundException;
-import io.abhithube.memberdetailsservice.exception.MemberAlreadyExistsException;
 import io.abhithube.memberdetailsservice.exception.MemberNotFoundException;
 import io.abhithube.memberdetailsservice.model.Member;
 import io.abhithube.memberdetailsservice.repository.MemberRepository;
@@ -27,14 +27,10 @@ public class MemberService {
                 .orElseThrow(() -> new CustomerNotFoundException(customerId));
     }
 
-    public Member saveMember(Member member) {
-        String username = member.getUsername();
-        String email = member.getEmail();
-
-        if (memberRepository.existsByUsername(username))
-            throw new MemberAlreadyExistsException("Username already exists");
-        else if (memberRepository.existsByEmail(email))
-            throw new MemberAlreadyExistsException("Email already exists");
+    public Member saveMember(RegisterRequest registerRequest) {
+        Member member = new Member();
+        member.setUsername(registerRequest.getUsername());
+        member.setEmail(registerRequest.getEmail());
 
         return memberRepository.save(member);
     }

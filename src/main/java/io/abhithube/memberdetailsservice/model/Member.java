@@ -20,7 +20,6 @@ public class Member {
     @Id
     private String id;
     private String username;
-    private String password;
     private String email;
 
     private Plan plan;

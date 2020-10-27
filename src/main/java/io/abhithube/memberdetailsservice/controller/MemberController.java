@@ -1,5 +1,6 @@
 package io.abhithube.memberdetailsservice.controller;
 
+import io.abhithube.memberdetailsservice.dto.RegisterRequest;
 import io.abhithube.memberdetailsservice.model.Member;
 import io.abhithube.memberdetailsservice.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +28,8 @@ public class MemberController {
     }
 
     @PostMapping
-    public ResponseEntity<Member> saveMember(@RequestBody Member member) {
-        return ResponseEntity.ok(memberService.saveMember(member));
+    public ResponseEntity<Member> saveMember(@RequestBody RegisterRequest registerRequest) {
+        return ResponseEntity.ok(memberService.saveMember(registerRequest));
     }
 
     @PutMapping("/{username}")

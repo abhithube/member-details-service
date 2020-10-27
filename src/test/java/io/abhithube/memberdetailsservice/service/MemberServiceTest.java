@@ -1,7 +1,7 @@
 package io.abhithube.memberdetailsservice.service;
 
+import io.abhithube.memberdetailsservice.dto.RegisterRequest;
 import io.abhithube.memberdetailsservice.exception.CustomerNotFoundException;
-import io.abhithube.memberdetailsservice.exception.MemberAlreadyExistsException;
 import io.abhithube.memberdetailsservice.exception.MemberNotFoundException;
 import io.abhithube.memberdetailsservice.model.Member;
 import io.abhithube.memberdetailsservice.repository.MemberRepository;
@@ -83,50 +83,18 @@ class MemberServiceTest {
 
     @Test
     @DisplayName("it should save a member")
-    void saveMember1() {
+    void saveMember() {
         // Arrange;
-        when(memberRepository.existsByUsername(anyString()))
-                .thenReturn(false);
-        when(memberRepository.existsByEmail(anyString()))
-                .thenReturn(false);
-
         Member m = new Member();
         m.setUsername("name");
-        m.setEmail("name@email.com");
         when(memberRepository.save(any(Member.class)))
                 .thenReturn(m);
 
         // Act
-        Member member = memberService.saveMember(m);
+        Member member = memberService.saveMember(new RegisterRequest());
 
         // Assert
         assertEquals("name", member.getUsername());
-    }
-
-    @Test
-    @DisplayName("it should throw an exception if a username is already taken")
-    void saveMember2() {
-        // Arrange
-        when(memberRepository.existsByUsername(anyString()))
-                .thenReturn(true);
-
-        // Act & Assert
-        Member member = new Member();
-        member.setUsername("user");
-        assertThrows(MemberAlreadyExistsException.class, () -> memberService.saveMember(member));
-    }
-
-    @Test
-    @DisplayName("it should throw an exception if an email is already taken")
-    void saveMember3() {
-        // Arrange
-        when(memberRepository.existsByEmail(anyString()))
-                .thenReturn(true);
-
-        // Act & Assert
-        Member member = new Member();
-        member.setEmail("name@email.com");
-        assertThrows(MemberAlreadyExistsException.class, () -> memberService.saveMember(member));
     }
 
     @Test
