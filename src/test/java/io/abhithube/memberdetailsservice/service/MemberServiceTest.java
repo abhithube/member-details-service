@@ -5,6 +5,7 @@ import io.abhithube.memberdetailsservice.exception.CustomerNotFoundException;
 import io.abhithube.memberdetailsservice.exception.MemberNotFoundException;
 import io.abhithube.memberdetailsservice.model.Member;
 import io.abhithube.memberdetailsservice.repository.MemberRepository;
+import io.abhithube.memberdetailsservice.util.KafkaClient;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class MemberServiceTest {
@@ -26,6 +27,8 @@ class MemberServiceTest {
     private MemberService memberService;
     @Mock
     private MemberRepository memberRepository;
+    @Mock
+    private KafkaClient kafkaClient;
 
     @Test
     @DisplayName("it should retrieve a member by username")
@@ -89,11 +92,14 @@ class MemberServiceTest {
         m.setUsername("name");
         when(memberRepository.save(any(Member.class)))
                 .thenReturn(m);
+        doNothing()
+                .when(kafkaClient).publish(any(Member.class));
 
         // Act
         Member member = memberService.saveMember(new RegisterRequest());
 
         // Assert
+        verify(kafkaClient).publish(m);
         assertEquals("name", member.getUsername());
     }
 
