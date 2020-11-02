@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/api/v1/members", produces = "application/json")
+@RequestMapping(value = "/", produces = "application/json")
 @Api(tags = "Member Details Resource", description = "Defines the CRUD operations associated with a member's info")
 public class MemberController {
     private final MemberService memberService;
