@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/", produces = "application/json")
+@RequestMapping(value = "/members", produces = "application/json")
 @Api(tags = "Member Details Resource", description = "Defines the CRUD operations associated with a member's info")
 public class MemberController {
     private final MemberService memberService;
@@ -22,7 +22,7 @@ public class MemberController {
     @GetMapping("/{username}")
     @ApiOperation("Retrieves a member by username")
     public ResponseEntity<Member> getMemberByUsername(@ApiParam(value = "The username to query for",
-            example = "user123") @PathVariable String username) {
+            example = "athube") @PathVariable String username) {
         return ResponseEntity.ok(memberService.getMemberByUsername(username));
     }
 

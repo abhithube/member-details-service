@@ -16,8 +16,9 @@ import springfox.documentation.swagger.web.UiConfigurationBuilder;
 public class SwaggerConfig {
     @Bean
     public UiConfiguration uiConfiguration() {
+        String[] supportedMethods = { "get" };
         return UiConfigurationBuilder.builder()
-                .supportedSubmitMethods(new String[0])
+                .supportedSubmitMethods(supportedMethods)
                 .docExpansion(DocExpansion.LIST)
                 .operationsSorter(OperationsSorter.METHOD)
                 .deepLinking(false)
