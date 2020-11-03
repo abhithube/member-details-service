@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/members", produces = "application/json")
-@Api(tags = "Member Details Resource", description = "Defines the CRUD operations associated with a member's info")
+@Api(tags = "Member Details Resource", description = "Defines the CRUD operations associated with a member's account")
 public class MemberController {
     private final MemberService memberService;
 
@@ -27,14 +27,14 @@ public class MemberController {
     }
 
     @GetMapping("/customer/{customerId}")
-    @ApiOperation(value = "Retrieves a member by customer OS", hidden = true)
+    @ApiOperation(value = "", hidden = true)
     public ResponseEntity<Member> getMemberByCustomerId(@PathVariable String customerId) {
         return ResponseEntity.ok(memberService.getMemberByCustomerId(customerId));
     }
 
     @PostMapping
     @ApiOperation("Persists a member")
-    public ResponseEntity<Member> saveMember(@ApiParam("The minimum info needed to create a member account")
+    public ResponseEntity<Member> saveMember(@ApiParam("The member details needed to create an account")
             @RequestBody RegisterRequest registerRequest) {
         return ResponseEntity.ok(memberService.saveMember(registerRequest));
     }
