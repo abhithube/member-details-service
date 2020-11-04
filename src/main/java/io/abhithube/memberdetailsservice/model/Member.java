@@ -9,6 +9,7 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Document(collection = "members")
@@ -24,9 +25,9 @@ public class Member {
     private Plan plan;
     private long memberSince;
     private long nextPaymentDate;
-    private List<Payment> payments;
+    private List<Payment> payments = new ArrayList<>();
 
-    private List<Notification> notifications;
+    private List<Notification> notifications = new ArrayList<>();
 
     private String customerId;
     private String subscriptionId;
