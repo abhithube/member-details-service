@@ -17,5 +17,4 @@ The API documentation for this microservice was generated using Swagger. It can 
 - Messaging: Kafka
 - Testing: JUnit, Mockito
 - Build: Maven
-- CI/CD: Travis CI, Docker
-- Deployment: AWS
+- CI/CD: Travis CI, Docker, AWS
